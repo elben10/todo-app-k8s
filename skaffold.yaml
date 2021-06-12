@@ -1,0 +1,27 @@
+apiVersion: skaffold/v2beta16
+kind: Config
+build:
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: elben10/api
+      docker:
+        dockerfile: images/api/Dockerfile
+      sync:
+        manual:
+          - src: src/api/src/**/*.py
+            dest: /app
+            strip: src/api/
+deploy:
+  helm:
+    releases:
+      - name: skaffold-helm
+        artifactOverrides:
+          ApiImage: elben10/api
+        chartPath: charts/todo
+profiles:
+  - name: development
+    patches:
+      - op: replace
+        path: /build/artifacts/0/docker/dockerfile
+        value: images/api/Dockerfile.Development
