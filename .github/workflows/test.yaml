@@ -9,6 +9,8 @@ jobs:
     name: Test
     runs-on: ubuntu-latest
     steps:
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
     - name: Start minkube
       run: minikube start
     - name: Install skaffold
