@@ -1,0 +1,13 @@
+name: Testing
+
+# Triggers the workflow on push or pull request events
+on: [push, pull_request]
+
+jobs:
+
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Start minkube
+      run: minikube start
