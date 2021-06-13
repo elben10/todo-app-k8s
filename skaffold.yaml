@@ -9,7 +9,7 @@ build:
         dockerfile: images/api/Dockerfile
       sync:
         manual:
-          - src: src/api/src/**/*.py
+          - src: src/api/**/*.py
             dest: /app
             strip: src/api/
     - image: elben10/frontend
