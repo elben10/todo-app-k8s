@@ -1,0 +1,14 @@
+FROM node:14
+
+WORKDIR /app
+
+COPY src/frontend/package*.json /app/
+
+RUN npm install
+
+COPY src/frontend/ /app/
+
+ENV PORT=80
+ENV HOST=0.0.0.0
+
+CMD ["npm", "run", "start"]

@@ -12,12 +12,21 @@ build:
           - src: src/api/src/**/*.py
             dest: /app
             strip: src/api/
+    - image: elben10/frontend
+      docker:
+        dockerfile: images/frontend/Dockerfile
+      sync:
+        manual:
+          - src: src/frontend/src/**/*.tsx
+            dest: /app
+            strip: src/frontend/
 deploy:
   helm:
     releases:
       - name: skaffold-helm
         artifactOverrides:
           ApiImage: elben10/api
+          FrontendImage: elben10/frontend
         chartPath: charts/todo
 profiles:
   - name: development
@@ -25,3 +34,6 @@ profiles:
       - op: replace
         path: /build/artifacts/0/docker/dockerfile
         value: images/api/Dockerfile.Development
+      - op: replace
+        path: /build/artifacts/1/docker/dockerfile
+        value: images/frontend/Dockerfile.Development
