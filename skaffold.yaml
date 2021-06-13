@@ -20,6 +20,9 @@ build:
           - src: src/frontend/src/**/*.tsx
             dest: /app
             strip: src/frontend/
+  local:
+    concurrency: 0
+    useBuildkit: true
 deploy:
   helm:
     releases:
