@@ -12,6 +12,8 @@ python = "^3.8"
 uvicorn = "^0.14.0"
 
 [tool.poetry.dev-dependencies]
+pytest = "^6.2.4"
+black = "^21.6b0"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
