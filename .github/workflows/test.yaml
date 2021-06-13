@@ -11,3 +11,11 @@ jobs:
     steps:
     - name: Start minkube
       run: minikube start
+    - name: Install skaffold
+      run: |
+        curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
+        sudo install skaffold /usr/local/bin/
+    - name: Deploy application in development mode
+      run: skaffold run -p development
+    - name: Run Test
+      run: bash scripts/test.sh
