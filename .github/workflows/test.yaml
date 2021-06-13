@@ -1,0 +1,23 @@
+name: Testing
+
+# Triggers the workflow on push or pull request events
+on: [push, pull_request]
+
+jobs:
+
+  build:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code into the Go module directory
+      uses: actions/checkout@v2
+    - name: Start minkube
+      run: minikube start
+    - name: Install skaffold
+      run: |
+        curl -Lo skaffold https://storage.googleapis.com/skaffold/releases/latest/skaffold-linux-amd64 && \
+        sudo install skaffold /usr/local/bin/
+    - name: Deploy application in development mode
+      run: skaffold run -p development
+    - name: Run Test
+      run: bash scripts/test.sh
